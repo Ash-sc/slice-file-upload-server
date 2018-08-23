@@ -17,6 +17,7 @@ router.post('/upload', multipartyMiddleware, function (req, res) {
   } = req.body
   const tmpBuffer = fs.readFileSync(req.files.file.path) // get file buffer
   const distFileName = key + '.' + filename.split('.').pop() // init file name
+  const downloadUrl = config.serverName + ':' + config.port + '/static/' + distFileName
 
   if (currentChunk === '0' && totalChunk === '1') {
     fs.open(path.join(__dirname, '../static/' + distFileName), 'a', (err, fd) => {
@@ -26,7 +27,7 @@ router.post('/upload', multipartyMiddleware, function (req, res) {
       res.status(200).json({
         errno: 0,
         data: {
-          path: config.serverName + ':' + config.port + '/static/' + distFileName
+          path: downloadUrl
         }
       })
     })
@@ -48,7 +49,7 @@ router.post('/upload', multipartyMiddleware, function (req, res) {
           res.status(200).json({
             errno: 0,
             data: {
-              path: config.serverName + ':' + config.port + '/static/' + distFileName
+              path: downloadUrl
             }
           })
         } else {
@@ -69,6 +70,5 @@ router.post('/upload', multipartyMiddleware, function (req, res) {
     }
   }
 })
-
 
 module.exports = router

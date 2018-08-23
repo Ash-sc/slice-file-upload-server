@@ -2,6 +2,10 @@ Slice file upload server.
 
 > A file upload server, use Node.js & Lowdb.
 
+# Online Demo.
+
+// to be continued.
+
 # Run
 
 ``` bash
@@ -26,6 +30,6 @@ chunkSize | string/number | true | chunk size |
 filename | string | true | original filename |
 file | blob | true | file blob |
 
-# Example
+## Api params example
 
 ![example](./upload-example.png)
